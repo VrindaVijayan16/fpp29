@@ -3,6 +3,187 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacts</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f9fa;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: #1976d2;
+      color: white;
+      padding: 14px;
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      z-index: 10;
+    }
+    .list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .list-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+      background: white;
+      transition: background 0.2s;
+    }
+    .list-item:hover {
+      background: #f1f1f1;
+    }
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      margin-right: 12px;
+      flex-shrink: 0;
+    }
+    .contact-info {
+      flex: 1;
+    }
+    .contact-name {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .contact-phone {
+      font-size: 14px;
+      color: #555;
+    }
+    .chevron {
+      font-size: 20px;
+      color: #aaa;
+    }
+    /* Detail Page */
+    #detail {
+      display: none;
+      padding: 16px;
+    }
+    .detail-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .detail-header .avatar {
+      width: 60px;
+      height: 60px;
+      font-size: 20px;
+      margin-right: 12px;
+    }
+    .detail-name {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .detail-section {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+    }
+    .detail-section i {
+      margin-right: 8px;
+      font-size: 18px;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 16px;
+      padding: 8px 14px;
+      background: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Contacts</header>
+
+  <ul id="home" class="list"></ul>
+
+  <div id="detail">
+    <button class="back-btn" onclick="goBack()">⬅ Back</button>
+    <div class="detail-header">
+      <div id="detail-avatar" class="avatar"></div>
+      <div>
+        <div id="detail-name" class="detail-name"></div>
+      </div>
+    </div>
+    <hr>
+    <div class="detail-section">
+      <i style="color:green">📞</i>
+      <span id="detail-phone"></span>
+    </div>
+    <div class="detail-section">
+      <i style="color:blue">📧</i>
+      <span id="detail-email"></span>
+    </div>
+  </div>
+
+  <script>
+    const contacts = [
+      { name: 'Aarav Krishna', phone: '+91 98765 43210', email: 'aarav@example.com', color: 'indigo' },
+      { name: 'Ananya Krishna', phone: '+91 99876 54321', email: 'ananya@example.com', color: 'teal' },
+      { name: 'Bhavesh Gopal', phone: '+91 98760 11122', email: 'bhavesh@example.com', color: 'darkorange' },
+      { name: 'Anu Krishna', phone: '+91 90000 22233', email: 'chirag@gmail.com', color: 'slategrey' },
+      { name: 'Devika Iyer', phone: '+91 98989 33344', email: 'devika@egmail.com', color: 'purple' },
+      { name: 'Ishaan Nair', phone: '+91 91234 56789', email: 'ishaan@gmail.com', color: 'green' },
+      { name: 'Kavya P.', phone: '+91 92345 67890', email: 'kavya@gmail.com', color: 'deeppink' },
+    ];
+
+    const home = document.getElementById("home");
+    const detail = document.getElementById("detail");
+
+    contacts.forEach(contact => {
+      const li = document.createElement("li");
+      li.className = "list-item";
+      li.innerHTML = `
+        <div class="avatar" style="background:${contact.color}">${contact.name[0]}</div>
+        <div class="contact-info">
+          <div class="contact-name">${contact.name}</div>
+          <div class="contact-phone">${contact.phone}</div>
+        </div>
+        <div class="chevron">›</div>
+      `;
+      li.onclick = () => showDetail(contact);
+      home.appendChild(li);
+    });
+
+    function showDetail(c) {
+      home.style.display = "none";
+      detail.style.display = "block";
+      document.getElementById("detail-avatar").style.background = c.color;
+      document.getElementById("detail-avatar").innerText = c.name[0];
+      document.getElementById("detail-name").innerText = c.name;
+      document.getElementById("detail-phone").innerText = c.phone;
+      document.getElementById("detail-email").innerText = c.email;
+      window.scrollTo(0, 0);
+    }
+
+    function goBack() {
+      detail.style.display = "none";
+      home.style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WhatsApp Simple (Web)</title>
   <style>
     body {
@@ -188,3 +369,4 @@
   </script>
 </body>
 </html>
+
